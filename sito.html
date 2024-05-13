@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sito aws</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+</head>
+<body>
+    <header>
+        <h1>Sito Web AWS</h1>
+    </header>
+    <section class="content">
+        <h2>Introduzione</h2>
+        <p>Questo sito web è una singola pagina ospitata su AWS. 
+           Spiega come ho configurato un server sicuro utilizzando contenitori Docker, 
+            e i componenti che ho usato.</p>
+        <h2>Tecnologie Utilizzate</h2>
+        <ul>
+            <li>Docker</li>
+            <li>Docker Compose</li>
+            <li>Docker Networks</li>
+            <li>Dockerfile</li>
+            <li>OpenSSL (per HTTPS)</li>
+            <li>Apache</li>
+            <li>PHP</li>
+            <li>HTML5</li>
+            <li>CSS3</li>
+        </ul>
+        <h2>Docker</h2>
+        <p>Docker è una piattaforma di containerizzazione che semplifica il processo di sviluppo, 
+            distribuzione e gestione delle applicazioni. Per questo progetto,
+            ho utilizzato Docker per creare e gestire i container che ospitano il server web Apache e PHP, 
+            garantendo un ambiente isolato e portatile.</p>
+
+        <h2>Docker Compose</h2>
+        <p>Docker Compose è uno strumento che permette di definire e gestire applicazioni Docker multi-container. 
+           Ho utilizzato Docker Compose per definire i servizi del nostro stack applicativo,
+             incluso il server web Apache e PHP, insieme alle reti e ai volumi necessari.</p>
+
+        <h2>Docker Networks</h2>
+        <p>Le Docker Networks consentono ai container di comunicare tra loro in modo sicuro e isolato. 
+            Le ho utilizzate per creare una rete virtuale privata in cui i container possono scambiarsi dati, 
+            garantendo al contempo la sicurezza e l'isolamento delle risorse.</p>     
+        
+        <h2>Dockerfile</h2>
+        <p>Il Dockerfile è un file di testo che contiene le istruzioni per la creazione di un'immagine Docker. 
+            Ho utilizzato un Dockerfile per definire come configurare l'immagine del server web Apache, 
+            specificando le dipendenze, le configurazioni e il codice dell'applicazione.</p>
+
+        <h2>OpenSSL (per HTTPS)</h2>
+        <p>OpenSSL è una libreria open source che fornisce implementazioni di protocolli di crittografia e sicurezza. 
+            L'ho' utilizzato per generare un certificato SSL self-signed per abilitare 
+            la connessione sicura HTTPS al nostro server web Apache, garantendo la protezione delle comunicazioni tra il client 
+            e il server.</p>
+
+        <h2>Apache</h2>
+        <p>Apache HTTP Server è un server web open source ampiamente utilizzato per distribuire siti web e applicazioni web.
+             Per questo progetto, ho utilizzato Apache come server web per ospitare il nostro sito web single page 
+             e servire pagine web dinamiche con PHP.</p>
+
+        <h2>PHP</h2>
+        <p>PHP è un linguaggio di programazione utilizzato per lo sviluppo di pagine web dinamiche.
+             L'ho utilizzato per gestire la logica di backend del nostro sito web, inclusa l'autenticazione degli utenti, 
+             l'accesso al database e la generazione dinamica del contenuto delle pagine web.</p>
+
+        <h2>HTML</h2>
+        <p>HTML è il linguaggio di markup standard per la creazione di pagine web. Con HTML,
+             è possibile definire la struttura e il contenuto di una pagina web utilizzando una serie di elementi, 
+             tag e attributi. Nel nostro progetto, ho utilizzato HTML per definire la struttura del nostro sito web single page,
+              inclusi l'header, la sezione di contenuto e il footer. Utilizzando tag come &lt;header&gt;, &lt;section&gt; e &lt;footer&gt;, 
+              ho organizzato il contenuto della mia pagina in modo chiaro.</p>
+             
+        <h2>CSS</h2>
+        <p>CSS è un linguaggio di stile utilizzato per definire l'aspetto e la formattazione di una pagina web. 
+            Con CSS, è possibile controllare gli stili, i colori, i margini, i padding e altri aspetti visivi HTML. 
+            Nel mio progetto, ho utilizzato CSS per applicare stili al sito web e renderlo più gradevole alla vista degli utenti. 
+            Utilizzando regole CSS come selettori, dichiarazioni e proprietà, abbiamo personalizzato il layout, 
+            i colori e altri aspetti visivi della nostra pagina HTML, rendendola più professionale e accattivante.</p>
+        
+        <h2>Passaggi che ho fatto</h2>
+        <p>La prima cosa fare dopo aver fatto l'accesso al servizio aws offerto da amazon, ho creato un istanza EC2.
+            Per farlo dobbiamo inanzitutto accedere, poi andare su modules selezionare "launch AWS academy learner LAB",
+            dopo si seleziona l'istanza e si seleziona "start lab" e una volta che l'avrà avviato selezionare la scritta "aws"
+            e qui c'è il momento di selezionare EC2 e qui si può o selezionare l'istanza se la si ha già pronta oppure crearla, e per 
+            crearla bisognerà compilare il form mettendo nome, selezionando ubuntu, inserire la coppia di chiavi, o crearla se non la si ha,
+            in seguito si selezionera connetti e cosi saremo connessi al istanza.
+            <br>
+            <h3>per installare docker ho usato i seguenti comandi: </h3>
+            <pre> <code>
+                sudo apt-get update
+                sudo apt-get install ca-certificates curl
+                sudo install -m 0755 -d /etc/apt/keyrings
+                sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+                sudo chmod a+r /etc/apt/keyrings/docker.asc
+            </code>
+            <code> echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+                   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+            </code>
+                <code> 
+                apt-get update
+                sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            </code>
+            </pre>
+            <br>
+            <h3> installare le immagini del container docker prese da internet:</h3>
+            <pre>
+                <code>
+                    sudo docker pull mysql
+                    sudo docker pull php:8.2-apache
+                </code>
+            </pre>
+            <br>
+            <h3> Dockerfile per l'immagine modificata di apache:</h3>
+            <pre>
+                <code>
+                    FROM php:8.2-apache
+                    COPY ./public-html/ /var/www/html
+                  # Copia chiave e certificato nelle cartelle di apache
+                    COPY ./keys/ssl-cert-snakeoil.key /etc/ssl/private
+                    COPY ./keys/ssl-cert-snakeoil.pem /etc/ssl/certs
+
+                  # Reindirizza il traffico http ad https
+                    RUN sed -i '/&lt;/VirtualHost&gt;/ i RewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}' /etc/apache2/sites-available/000-default.conf
+
+                    RUN a2enmod rewrite
+                    RUN a2enmod ssl
+                    RUN a2ensite default-ssl
+
+                  # Installa mysqli
+                    RUN docker-php-ext-install mysqli && \
+                    docker-php-ext-enable mysqli 
+                </code>
+            </pre>
+            <h3> file compose.yaml per permettere l'uso contemporaneo sia del db che del server web:</h3>
+            <pre>
+                <code>
+                    services:
+                        server web:
+                            build: progettoAWS
+                            depends_on:
+                            - database
+                            ports:
+                            - "80:80"
+                            - "443:443"
+                            networks:
+                            - rete
+
+                        database:
+                            image: mysql:latest
+                            environment:
+                            MYSQL_ROOT_PASSWORD: password
+                            MYSQL_DATABASE: database
+                            networks:
+                            - rete
+
+                    networks:
+                        rete:  
+
+                </code>
+            </pre>
+            <br>
+            <h3> per il certificato self-signed:</h3>
+            <pre>
+                <code>
+                    openssl req  -nodes -new -x509  -keyout keys/ssl-cert-snakeoil.key -out keys/ssl-cert-snakeoil.pem 
+                </code>
+            </pre>
+        </p>
+    </section>
+    <footer>
+        <p>&copy; 2024 Sito Web Single Page. Tutti i diritti riservati.</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+<script>hljs.highlightAll();</script>
+</body>
+</html>
